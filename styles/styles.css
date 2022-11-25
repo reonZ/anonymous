@@ -1,0 +1,22 @@
+#anonymous-names-menu .window-content .actor {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 4px;
+}
+#anonymous-names-menu .window-content .actor label {
+  text-transform: capitalize;
+  text-align: end;
+  width: 9em;
+}
+#anonymous-names-menu .window-content .buttons {
+  display: flex;
+  margin-top: 0.5em;
+}
+
+.anonymous-replaced {
+  background-color: #e8e8ef;
+  outline: 1px dotted rgba(75, 74, 68, 0.5);
+  border-radius: 1px;
+  padding: 0 1px;
+}

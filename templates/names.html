@@ -1,0 +1,12 @@
+<form>
+    {{#each types}}
+    <div class="actor">
+        <label>{{this.type}}</label>
+        <input type="text" name="{{this.type}}" value="{{this.value}}" placeholder="{{this.placeholder}}" />
+    </div>
+    {{/each}}
+    <div class="buttons">
+        <button type="submit"><i class="fas fa-floppy-disk"></i> {{anonymous 'names.save'}}</button>
+        <button type="button" data-action="cancel"><i class="fas fa-xmark"></i> {{anonymous 'names.cancel'}}</button>
+    </div>
+</form>
