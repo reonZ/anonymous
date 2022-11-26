@@ -2,6 +2,26 @@
 
 This module will attempt to make any "creature" that is not owned by a player anonymous across the foundry. It will also offer the ability to toggle the showing of a creature's name individually.
 
+-   [Combat Tracker](#combat-tracker)
+-   [Token Nameplate](#token-nameplate)
+-   [Token HUD](#token-hud)
+-   [Actors Directory](#actors-directory)
+-   [Chat Messages](#chat-messages)
+-   [Settings](#settings)
+    -   [Setup Names](#setup-names)
+    -   [Force Token Nameplate (default)](#force-token-nameplate-default)
+    -   [Hide Rolls Details (default)](#hide-rolls-details-default)
+    -   [Hide Criticals (default)](#hide-criticals-default)
+    -   [Hide Card Content](#hide-card-content)
+    -   [Hide Footers](#hide-footers)
+-   [Systems and Modules](#systems-and-modules)
+    -   [DnD5e](#dnd5e)
+        -   [Additional Changes](#additional-changes)
+    -   [Pathfinder Second Edition (Official)](#pathfinder-second-edition-official)
+        -   [Additional Changes](#additional-changes-1)
+        -   [Additional Settings](#additional-settings)
+-   [API](#api)
+
 # Combat Tracker
 
 The name of creatures in the combat tracker will be "hidden" from the players when appropriate.
