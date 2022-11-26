@@ -2,6 +2,7 @@ import { getCurrentModule } from '~src/@utils/foundry/module'
 import { warn } from '~src/@utils/foundry/notifications'
 import { getSetting, registerSetting } from '~src/@utils/foundry/settings'
 import { playersSeeName } from '~src/api'
+import { replaceHTMLText } from '~src/@utils/jquery'
 import type { ThirdPartyChatParseArgs } from '~src/third'
 
 export function pf2eInitHook(isGM: boolean) {
@@ -36,9 +37,11 @@ function disableSettings() {
     warn('pf2e.disabled', { module, setting }, true)
 }
 
-export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatParseArgs<ChatMessagePF2e>) {
+export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatParseArgs) {
     const isGM = game.user.isGM
-    const target = message.target?.actor
+    const target = (message as ChatMessagePF2e).target?.actor
+    const criticals = getSetting('criticals')
+    const rolls = getSetting('rolls')
 
     if (target && !target.hasPlayerOwner && !playersSeeName(target)) {
         const $targets = $html.find('header .flavor-text .target-dc [data-whose="target"]')
@@ -53,14 +56,14 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
         const traits = getSetting('pf2e.traits')
 
         if (message.rolls.length) {
-            if (getSetting('rolls')) {
+            if (rolls) {
                 const $tags = $html.find('header .flavor-text hr + .tags')
                 if ($tags.length) {
                     $tags.prev('hr').remove()
                     $tags.remove()
                 }
 
-                if (getSetting('criticals')) {
+                if (criticals) {
                     $html.find('.message-content .dice-roll .dice-result .dice-total').removeClass('success failure')
                 }
 
@@ -73,5 +76,14 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
         } else if (traits === 'always') {
             $html.find('.message-content section.tags').remove()
         }
+    }
+
+    if (!playersCanSee && message.rolls.length && rolls && criticals) {
+        const critical = game.i18n.localize('PF2E.Check.Result.Degree.Attack.criticalSuccess')
+        const hit = game.i18n.localize('PF2E.Check.Result.Degree.Attack.success')
+        const regex = new RegExp(`(\\((${critical}|${hit})\\))`, 'gm')
+        const str = isGM ? '<span class="anonymous-replaced">$1</span>' : ''
+        const flavor = $html.find('header .flavor-text')
+        replaceHTMLText(flavor, regex, str, true)
     }
 }

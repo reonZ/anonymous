@@ -1,10 +1,10 @@
 import { dnd5ParseChat } from './third/dnd5e'
 import { pf2eInitHook, pf2eParseChat, pf2eReadyHook } from './third/pf2e'
 
-export interface ThirdPartyChatParseArgs<TChatMessage extends ChatMessage = ChatMessage, TActor extends Actor = Actor> {
+export interface ThirdPartyChatParseArgs {
     playersCanSee: boolean
-    message: TChatMessage
-    actor: TActor | null
+    message: ChatMessage
+    actor: Actor | null
     $html: JQuery
 }
 
