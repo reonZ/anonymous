@@ -3,12 +3,23 @@ import { localize } from './@utils/foundry/i18n'
 import { updateActorTokens } from './token'
 import { formatUnknown, getSavedNames } from './utils'
 
-export function playersSeeName(doc: Actor | Combatant) {
+/**
+ * @param {Actor | Combatant} doc
+ * @returns {boolean} the current state of visibility
+ */
+export function playersSeeName(doc: Actor | Combatant): boolean {
     if (doc instanceof Actor || !doc.actor) return !!getFlag(doc, 'showName')
     return !!getFlag(doc.actor, 'showName')
 }
 
-export async function toggleSeeName(doc: Actor | Combatant) {
+/**
+ * Toggles the state of visibility
+ * This will trigger a refresh of different parts of the UI to reflect the new state
+ *
+ * @param {Actor | Combatant} doc
+ * @returns {Promise<boolean>} a promise with the new state of visibility
+ */
+export async function toggleSeeName(doc: Actor | Combatant): Promise<boolean> {
     const showName = !playersSeeName(doc)
 
     if (doc instanceof Actor || !doc.actor) await setFlag(doc, 'showName', showName)
@@ -18,9 +29,15 @@ export async function toggleSeeName(doc: Actor | Combatant) {
 
     const actor = doc instanceof Actor ? doc : doc.actor
     if (actor) updateActorTokens(actor, showName)
+
+    return showName
 }
 
-export function getName(doc: Actor | Combatant) {
+/**
+ * @param {Actor | Combatant} doc
+ * @returns {string} the replacement name with no regard for the current state of visibility
+ */
+export function getName(doc: Actor | Combatant): string {
     const unknown = localize('unknown')
     const type = doc instanceof Actor ? doc.type : doc.actor?.type
     if (!type) return unknown
