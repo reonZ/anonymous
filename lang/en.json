@@ -2,7 +2,7 @@
     "anonymous": {
         "settings": {
             "token": {
-                "name": "Force Token Name",
+                "name": "Force Token Nameplate",
                 "hint": "When showing a creature's name, should the module forces the display of its token nameplate."
             },
             "rolls": {
