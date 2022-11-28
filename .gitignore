@@ -2,7 +2,6 @@
 .parcel-cache/
 node_modules/
 releases/
-scripts/
 @types/
 @types
 ignore.txt
