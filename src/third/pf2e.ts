@@ -1,8 +1,9 @@
 import { getCurrentModule } from '~src/@utils/foundry/module'
 import { warn } from '~src/@utils/foundry/notifications'
+import { getSettingLocalizationPath } from '~src/@utils/foundry/path'
 import { getSetting, registerSetting } from '~src/@utils/foundry/settings'
-import { playersSeeName } from '~src/api'
 import { replaceHTMLText } from '~src/@utils/jquery'
+import { playersSeeName } from '~src/api'
 import type { ThirdPartyChatParseArgs } from '~src/third'
 
 export function pf2eInitHook(isGM: boolean) {
@@ -12,9 +13,9 @@ export function pf2eInitHook(isGM: boolean) {
         default: 'never',
         config: true,
         choices: {
-            never: 'never',
-            rolls: 'rolls',
-            always: 'always',
+            never: getSettingLocalizationPath('pf2e.traits.choices.never'),
+            rolls: getSettingLocalizationPath('pf2e.traits.choices.rolls'),
+            always: getSettingLocalizationPath('pf2e.traits.choices.always'),
         },
     })
 }
