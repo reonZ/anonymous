@@ -57,6 +57,18 @@ function $d3c956a52a17449c$export$7d75da6d34f1a955() {
     const user = data.users.find((x)=>x._id === data.userId);
     return !!user && user.role >= CONST.USER_ROLES.GAMEMASTER;
 }
+function $d3c956a52a17449c$export$148de59b68ce26ae(doc, connected = false) {
+    if (connected) return game.users.filter((x)=>x.active && doc.testUserPermission(x, "OWNER"));
+    return game.users.filter((x)=>doc.testUserPermission(x, "OWNER"));
+}
+function $d3c956a52a17449c$export$5f4ed0d56c2c0edf(doc, connected = false) {
+    if (connected) return game.users.find((x)=>x.active && doc.testUserPermission(x, "OWNER"));
+    return game.users.find((x)=>doc.testUserPermission(x, "OWNER"));
+}
+function $d3c956a52a17449c$export$31d9ed870e9f0a1d(connected = false) {
+    if (connected) return game.users.find((x)=>x.active && x.isGM);
+    return game.users.find((x)=>x.isGM);
+}
 
 
 
@@ -146,6 +158,10 @@ function $53cf1f1c9c92715e$export$5e165df1e30a1331(doc, key, value) {
 
 function $2498048dd39926c2$export$99925ce9e702f588(actor, linkedOnly = false) {
     return game.scenes.map((scene)=>scene.tokens.filter((token)=>token.actorId === actor.id && (!linkedOnly || token.actorLink))).flat();
+}
+function $2498048dd39926c2$export$b64e7dcb984d6faa(actor, connected = false) {
+    if (connected) return game.users.find((x)=>x.active && x.character === actor);
+    return game.users.find((x)=>x.character === actor);
 }
 
 
@@ -375,6 +391,7 @@ function $d20bc07084c62caf$export$a3bc9b8ed74fc(str, arg1, arg2) {
 
 
 
+
 function $6c597d232d6f5f12$export$a0f2b21598221a1e(isGM) {
     (0, $b29eb7e0eb12ddbc$export$3bfe3819d89751f0)({
         name: "pf2e.traits",
@@ -382,9 +399,9 @@ function $6c597d232d6f5f12$export$a0f2b21598221a1e(isGM) {
         default: "never",
         config: true,
         choices: {
-            never: "never",
-            rolls: "rolls",
-            always: "always"
+            never: (0, $ee65ef5b7d5dd2ef$export$f6ed52839c6955bc)("pf2e.traits.choices.never"),
+            rolls: (0, $ee65ef5b7d5dd2ef$export$f6ed52839c6955bc)("pf2e.traits.choices.rolls"),
+            always: (0, $ee65ef5b7d5dd2ef$export$f6ed52839c6955bc)("pf2e.traits.choices.always")
         }
     });
 }

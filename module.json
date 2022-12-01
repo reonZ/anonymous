@@ -26,12 +26,12 @@
         "minimum": "10.290",
         "verified": "10"
     },
-    "version": "1.0.2",
+    "version": "1.0.3",
     "manifestPlusVersion": "1.2.0",
     "url": "https://github.com/reonZ/anonymous",
     "readme": "https://github.com/reonZ/anonymous/blob/master/README.md",
     "manifest": "https://raw.githubusercontent.com/reonZ/anonymous/master/module.json",
-    "download": "https://github.com/reonZ/anonymous/releases/download/1.0.2/module.zip",
+    "download": "https://github.com/reonZ/anonymous/releases/download/1.0.3/module.zip",
     "changelog": "https://github.com/reonZ/anonymous/releases",
     "bugs": "https://github.com/reonZ/anonymous/issues"
 }
