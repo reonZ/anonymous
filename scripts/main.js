@@ -23,6 +23,9 @@ function $ee65ef5b7d5dd2ef$export$79b67f6e2f31449(...path) {
 function $ee65ef5b7d5dd2ef$export$bdd507c72609c24e(...path) {
     return `modules/${0, $1623e5e7c705b7c7$export$2e2bcd8739ae039}/templates/${path.join("/")}`;
 }
+function $ee65ef5b7d5dd2ef$export$6d1a79e7c04100c2(...path) {
+    return `modules/${0, $1623e5e7c705b7c7$export$2e2bcd8739ae039}/images/${path.join("/")}`;
+}
 
 
 function $b29eb7e0eb12ddbc$export$8206e8d612b3e63(key) {
@@ -49,6 +52,9 @@ function $b29eb7e0eb12ddbc$export$cd2f7161e4d70860(options) {
     options.restricted = options.restricted ?? true;
     options.icon = options.icon ?? "fas fa-cogs";
     game.settings.registerMenu((0, $1623e5e7c705b7c7$export$2e2bcd8739ae039), name, options);
+}
+function $b29eb7e0eb12ddbc$export$8cb4a6769fa1780e() {
+    return game.settings.get("core", "combatTrackerConfig");
 }
 
 
@@ -358,7 +364,7 @@ function $befe1a89932b5fb0$export$1cab9c19b5d4cfd9({ message: message , $html: $
     if (message.rolls.length && (0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("criticals")) {
         const critical = game.i18n.localize("DND5E.CriticalHit");
         const powerful = game.i18n.localize("DND5E.PowerfulCritical");
-        const regexp = new RegExp(` (\\(([\\w ]*)?(?:${critical}|${powerful})([\\w ]*)?\\))$`, "i");
+        const regexp = new RegExp(` (\\(([\\w ]*)?(?:${critical}|${powerful})([\\w ]*)?\\))$`, "igm");
         const $flavor = $html.find("header .flavor-text");
         if (isGM) (0, $f89c90010a6c8f0b$export$5ba7e9d04e0f19d)($flavor, regexp, ' <span class="anonymous-replaced">$1</span>', true);
         (0, $f89c90010a6c8f0b$export$5ba7e9d04e0f19d)($flavor, regexp, "", true);
@@ -451,7 +457,7 @@ function $6c597d232d6f5f12$export$92c83b7d19bc5f58({ message: message , playersC
     if (!playersCanSee && message.rolls.length && rolls && criticals) {
         const critical = game.i18n.localize("PF2E.Check.Result.Degree.Attack.criticalSuccess");
         const hit = game.i18n.localize("PF2E.Check.Result.Degree.Attack.success");
-        const regex = new RegExp(`(\\((${critical}|${hit})\\))`, "gm");
+        const regex = new RegExp(`(\\((${critical}|${hit})\\))`, "gmi");
         const str = isGM ? '<span class="anonymous-replaced">$1</span>' : "";
         const flavor = $html.find("header .flavor-text");
         (0, $f89c90010a6c8f0b$export$5ba7e9d04e0f19d)(flavor, regex, str, true);
@@ -521,7 +527,7 @@ function $cf4c32f03d9bb335$var$changeNames(message, actor, html) {
         if (token) names.add(token.name);
     }
     const joined = Array.from(names).join("|");
-    const regexp = new RegExp(`(${joined})`, "gm");
+    const regexp = new RegExp(`(${joined})`, "gmi");
     const renamed = (0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(actor);
     const replacement = game.user.isGM ? `<span class="anonymous-replaced" title="${renamed}">$1</span>` : renamed;
     (0, $f89c90010a6c8f0b$export$5ba7e9d04e0f19d)(html, regexp, replacement);
