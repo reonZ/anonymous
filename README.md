@@ -21,6 +21,7 @@ This module will attempt to make any "creature" that is not owned by a player an
         -   [Additional Changes](#additional-changes-1)
         -   [Additional Settings](#additional-settings)
 -   [API](#api)
+-   [CHANGELOGS](#changelogs)
 
 # Combat Tracker
 
@@ -158,3 +159,7 @@ function toggleSeeName(doc: Actor | Combatant): Promise<boolean>
  */
 function getName(doc: Actor | Combatant): string
 ```
+
+# CHANGELOGS
+
+You can see the changelogs [HERE](./CHANGELOG.md)
