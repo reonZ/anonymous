@@ -82,7 +82,7 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
     if (!playersCanSee && message.rolls.length && rolls && criticals) {
         const critical = game.i18n.localize('PF2E.Check.Result.Degree.Attack.criticalSuccess')
         const hit = game.i18n.localize('PF2E.Check.Result.Degree.Attack.success')
-        const regex = new RegExp(`(\\((${critical}|${hit})\\))`, 'gm')
+        const regex = new RegExp(`(\\((${critical}|${hit})\\))`, 'gmi')
         const str = isGM ? '<span class="anonymous-replaced">$1</span>' : ''
         const flavor = $html.find('header .flavor-text')
         replaceHTMLText(flavor, regex, str, true)
