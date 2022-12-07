@@ -31,14 +31,16 @@ function changeNames(message: ChatMessage, actor: Actor, html: JQuery) {
     const speaker = message.speaker
     const names = new Set()
 
-    names.add(speaker.alias)
-    names.add(actor.name)
+    if (speaker.alias) names.add(speaker.alias)
+    if (actor.name) names.add(actor.name)
 
     if (speaker.token && speaker.scene) {
         const scene = game.scenes.get(speaker.scene)
         const token = scene?.tokens.get(speaker.token)
-        if (token) names.add(token.name)
+        if (token?.name) names.add(token.name)
     }
+
+    if (!names.size) return
 
     const joined = Array.from(names).join('|')
     const regexp = new RegExp(`(${joined})`, 'gmi')
