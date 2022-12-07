@@ -45,7 +45,7 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
     const rolls = getSetting('rolls')
 
     if (target && !target.hasPlayerOwner && !playersSeeName(target)) {
-        const $targets = $html.find('header .flavor-text .target-dc [data-whose="target"]')
+        const $targets = $html.find('.flavor-text .target-dc [data-whose="target"]')
         if ($targets.length) {
             const $target = $targets.first()
             if (isGM) $target.attr('data-visibility', 'gm')
@@ -58,7 +58,8 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
 
         if (message.rolls.length) {
             if (rolls) {
-                const $tags = $html.find('header .flavor-text hr + .tags')
+                const $tags = $html.find('.flavor-text hr + .tags')
+                console.log($tags)
                 if ($tags.length) {
                     $tags.prev('hr').remove()
                     $tags.remove()
@@ -69,10 +70,10 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
                 }
 
                 if (traits !== 'never') {
-                    $html.find('header .flavor-text .tags').remove()
+                    $html.find('.flavor-text .tags').remove()
                 }
             } else if (traits === 'always') {
-                $html.find('header .flavor-text .tags').first().remove()
+                $html.find('.flavor-text .tags').first().remove()
             }
         } else if (traits === 'always') {
             $html.find('.message-content section.tags').remove()
