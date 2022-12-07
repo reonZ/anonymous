@@ -437,7 +437,7 @@ function $6c597d232d6f5f12$export$92c83b7d19bc5f58({ message: message , playersC
     const criticals = (0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("criticals");
     const rolls = (0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("rolls");
     if (target && !target.hasPlayerOwner && !(0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(target)) {
-        const $targets = $html.find('header .flavor-text .target-dc [data-whose="target"]');
+        const $targets = $html.find('.flavor-text .target-dc [data-whose="target"]');
         if ($targets.length) {
             const $target = $targets.first();
             if (isGM) $target.attr("data-visibility", "gm");
@@ -448,14 +448,15 @@ function $6c597d232d6f5f12$export$92c83b7d19bc5f58({ message: message , playersC
         const traits = (0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("pf2e.traits");
         if (message.rolls.length) {
             if (rolls) {
-                const $tags = $html.find("header .flavor-text hr + .tags");
+                const $tags = $html.find(".flavor-text hr + .tags");
+                console.log($tags);
                 if ($tags.length) {
                     $tags.prev("hr").remove();
                     $tags.remove();
                 }
                 if (criticals) $html.find(".message-content .dice-roll .dice-result .dice-total").removeClass("success failure");
-                if (traits !== "never") $html.find("header .flavor-text .tags").remove();
-            } else if (traits === "always") $html.find("header .flavor-text .tags").first().remove();
+                if (traits !== "never") $html.find(".flavor-text .tags").remove();
+            } else if (traits === "always") $html.find(".flavor-text .tags").first().remove();
         } else if (traits === "always") $html.find(".message-content section.tags").remove();
     }
     if (!playersCanSee && message.rolls.length && rolls && criticals) {

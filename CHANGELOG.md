@@ -1,3 +1,7 @@
+# 1.0.6
+
+-   fixed bug with `PF2e Dorako UI` using a different element tree structure for chat cards.
+
 # 1.0.5
 
 -   fixed a bug with not fully provided speaker data on chat message create.
