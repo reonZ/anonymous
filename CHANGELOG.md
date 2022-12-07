@@ -1,3 +1,7 @@
+# 1.0.5
+
+-   fixed a bug with not fully provided speaker data on chat message create.
+
 # 1.0.4
 
 -   name parsing in chat messages is now case insensitive

@@ -42,6 +42,10 @@ function $b29eb7e0eb12ddbc$export$3bfe3819d89751f0(options) {
         options.name = (0, $ee65ef5b7d5dd2ef$export$f6ed52839c6955bc)(name, "name");
         options.hint = (0, $ee65ef5b7d5dd2ef$export$f6ed52839c6955bc)(name, "hint");
     }
+    if (Array.isArray(options.choices)) options.choices = options.choices.reduce((choices, choice)=>{
+        choices[choice] = (0, $ee65ef5b7d5dd2ef$export$f6ed52839c6955bc)(name, "choices", choice);
+        return choices;
+    }, {});
     game.settings.register((0, $1623e5e7c705b7c7$export$2e2bcd8739ae039), name, options);
 }
 function $b29eb7e0eb12ddbc$export$cd2f7161e4d70860(options) {
@@ -519,13 +523,14 @@ function $cf4c32f03d9bb335$export$e34687540c625f04(message, html) {
 function $cf4c32f03d9bb335$var$changeNames(message, actor, html) {
     const speaker = message.speaker;
     const names = new Set();
-    names.add(speaker.alias);
-    names.add(actor.name);
+    if (speaker.alias) names.add(speaker.alias);
+    if (actor.name) names.add(actor.name);
     if (speaker.token && speaker.scene) {
         const scene = game.scenes.get(speaker.scene);
         const token = scene?.tokens.get(speaker.token);
-        if (token) names.add(token.name);
+        if (token?.name) names.add(token.name);
     }
+    if (!names.size) return;
     const joined = Array.from(names).join("|");
     const regexp = new RegExp(`(${joined})`, "gmi");
     const renamed = (0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(actor);
