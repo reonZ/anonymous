@@ -473,6 +473,7 @@ function $6c597d232d6f5f12$export$92c83b7d19bc5f58({ message: message , playersC
 
 
 
+const $74a6901965f6495e$var$SAVE = /\(dc \d+\)/gim;
 function $74a6901965f6495e$export$a0265aeb076e42a8({ message: message , playersCanSee: playersCanSee , $html: $html  }) {
     if (game.user.isGM) return;
     if (!playersCanSee) {
@@ -481,19 +482,28 @@ function $74a6901965f6495e$export$a0265aeb076e42a8({ message: message , playersC
             $tooltips.empty();
             $tooltips.css("padding-top", 0);
             if ((0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("criticals")) $html.find(".dice-total").removeClass("critical fumble");
+            const $save = $html.find(".phase-saving-throws .phase-heading");
+            $save.text($save.text().replace($74a6901965f6495e$var$SAVE, ""));
         }
     }
     // target
     const $target = $html.find(".phase-attack .token-info .token-name");
-    if (!$target) return;
     const targetUUID = message.getFlag("wire", "activation.attack.targetActorUuid");
-    if (!targetUUID) return;
-    try {
+    if ($target.length && targetUUID) try {
         const target = fromUuidSync(targetUUID)?.actor;
-        if (!target || target.hasPlayerOwner || (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(target)) return;
-        $target.text((0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(target));
-    } catch  {
-        return;
+        if (target && !target.hasPlayerOwner && !(0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(target)) $target.text((0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(target));
+    } catch (error) {
+        console.error(error);
+    }
+    const $targets = $html.find(".phase-saving-throws .saving-throw-target:has(.target-name)");
+    const targetsUUID = message.getFlag("wire", "activation.targetUuids");
+    if ($targets.length && targetsUUID?.length) try {
+        for (const uuid of targetsUUID){
+            const target1 = fromUuidSync(uuid)?.actor;
+            if (target1 && !target1.hasPlayerOwner && !(0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(target1)) $targets.filter(`[data-actor-id="${uuid}"]`).find(".target-name").text((0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(target1));
+        }
+    } catch (error1) {
+        console.error(error1);
     }
 }
 

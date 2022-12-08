@@ -1,6 +1,10 @@
+# 1.1.1
+
+-   now also make saving throws anonymous in chat when using `Whistler's Item Rolls Extended`.
+
 # 1.1.0
 
--   now should be compatible with the module `Whistler's Item Rolls Extended`.
+-   should now be compatible with the module `Whistler's Item Rolls Extended`.
 
 # 1.0.7
 

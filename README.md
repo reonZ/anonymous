@@ -20,6 +20,8 @@ This module will attempt to make any "creature" that is not owned by a player an
     -   [Pathfinder Second Edition (Official)](#pathfinder-second-edition-official)
         -   [Additional Changes](#additional-changes-1)
         -   [Additional Settings](#additional-settings)
+    -   [Whistler's Item Rolls Extended](#whistlers-item-rolls-extended)
+        -   [Additional Changes](#additional-changes-2)
 -   [API](#api)
 -   [CHANGELOG](#changelog)
 
@@ -127,6 +129,7 @@ The PF2e system has its own feature to hide creature names, this module will dis
 ### Additional Changes
 
 -   Hide the target's name in roll messages.
+-   `Hide Rolls Details` will hide DC for saving throws
 
 # API
 
