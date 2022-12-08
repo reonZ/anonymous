@@ -1,3 +1,7 @@
+# 1.0.7
+
+-   fixed escapable character for rename
+
 # 1.0.6
 
 -   fixed bug with `PF2e Dorako UI` using a different element tree structure for chat cards.

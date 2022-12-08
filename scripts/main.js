@@ -496,12 +496,13 @@ function $7dfb009370bda395$var$createThirdPartyListener() {
 }
 
 
+const $cf4c32f03d9bb335$var$ESCAPE = /(["'\(\)\[\]])/gm;
 function $cf4c32f03d9bb335$export$e34687540c625f04(message, html) {
     if (message.blind) return;
     const isGM = game.user.isGM;
     const speaker = message.speaker;
     const actor = ChatMessage.getSpeakerActor(speaker);
-    const playersCanSee = !!actor && (actor.hasPlayerOwner || (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(actor));
+    const playersCanSee = !actor || actor.hasPlayerOwner || (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(actor);
     if (actor && !playersCanSee) {
         $cf4c32f03d9bb335$var$changeNames(message, actor, html);
         if (!isGM) {
@@ -532,7 +533,7 @@ function $cf4c32f03d9bb335$var$changeNames(message, actor, html) {
         if (token?.name) names.add(token.name);
     }
     if (!names.size) return;
-    const joined = Array.from(names).join("|");
+    const joined = RegExp.escape(Array.from(names).join("|"));
     const regexp = new RegExp(`(${joined})`, "gmi");
     const renamed = (0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(actor);
     const replacement = game.user.isGM ? `<span class="anonymous-replaced" title="${renamed}">$1</span>` : renamed;
