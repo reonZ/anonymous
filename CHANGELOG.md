@@ -1,6 +1,6 @@
 # 1.0.7
 
--   fixed escapable character for rename
+-   fixed special characters when renaming chat messages
 
 # 1.0.6
 
