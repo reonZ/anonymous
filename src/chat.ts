@@ -3,13 +3,15 @@ import { replaceHTMLText } from './@utils/jquery'
 import { getName, playersSeeName } from './api'
 import { thirdPartyChatParse } from './third'
 
+const ESCAPE = /(["'\(\)\[\]])/gm
+
 export function renderChatMessage(message: ChatMessage, html: JQuery) {
     if (message.blind) return
 
     const isGM = game.user.isGM
     const speaker = message.speaker
     const actor = ChatMessage.getSpeakerActor(speaker)
-    const playersCanSee = !!actor && (actor.hasPlayerOwner || playersSeeName(actor))
+    const playersCanSee = !actor || actor.hasPlayerOwner || playersSeeName(actor)
 
     if (actor && !playersCanSee) {
         changeNames(message, actor, html)
@@ -29,7 +31,7 @@ export function renderChatMessage(message: ChatMessage, html: JQuery) {
 
 function changeNames(message: ChatMessage, actor: Actor, html: JQuery) {
     const speaker = message.speaker
-    const names = new Set()
+    const names: Set<string> = new Set()
 
     if (speaker.alias) names.add(speaker.alias)
     if (actor.name) names.add(actor.name)
@@ -42,7 +44,7 @@ function changeNames(message: ChatMessage, actor: Actor, html: JQuery) {
 
     if (!names.size) return
 
-    const joined = Array.from(names).join('|')
+    const joined = RegExp.escape(Array.from(names).join('|'))
     const regexp = new RegExp(`(${joined})`, 'gmi')
     const renamed = getName(actor)
     const replacement = game.user.isGM ? `<span class="anonymous-replaced" title="${renamed}">$1</span>` : renamed
