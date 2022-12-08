@@ -122,6 +122,12 @@ The PF2e system has its own feature to hide creature names, this module will dis
 
 -   `Hide Traits` Will offer the possibility to hide action traits from chat messages, if `Rolls Only` is selected, the `Hide Rolls Details` setting must be enabled
 
+## Whistler's Item Rolls Extended
+
+### Additional Changes
+
+-   Hide the target's name in roll messages.
+
 # API
 
 A set of functions is exposed from the module to be used by third parties:

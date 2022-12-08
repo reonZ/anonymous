@@ -1,3 +1,7 @@
+# 1.1.0
+
+-   now should be compatible with the module `Whistler's Item Rolls Extended`.
+
 # 1.0.7
 
 -   fixed special characters when renaming chat messages

@@ -1,5 +1,7 @@
+import { getModule } from './@utils/foundry/module'
 import { dnd5ParseChat } from './third/dnd5e'
 import { pf2eInitHook, pf2eParseChat, pf2eReadyHook } from './third/pf2e'
+import { wireParseChat } from './third/wire'
 
 export interface ThirdPartyChatParseArgs {
     playersCanSee: boolean
@@ -23,6 +25,10 @@ export function thirdPartyInitialization() {
             // thirdPartyInitHooks.add(dnd5InitHook)
             thirdPartyChatParse.add(dnd5ParseChat)
             break
+    }
+
+    if (getModule('wire')?.active) {
+        thirdPartyChatParse.add(wireParseChat)
     }
 }
 
