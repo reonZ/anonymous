@@ -362,6 +362,7 @@ function $f89c90010a6c8f0b$export$5ba7e9d04e0f19d(html, regexp, replacement, add
 
 
 
+
 function $befe1a89932b5fb0$export$1cab9c19b5d4cfd9({ message: message , $html: $html , playersCanSee: playersCanSee  }) {
     if (playersCanSee) return;
     const isGM = game.user.isGM;
@@ -470,6 +471,33 @@ function $6c597d232d6f5f12$export$92c83b7d19bc5f58({ message: message , playersC
 }
 
 
+
+
+function $74a6901965f6495e$export$a0265aeb076e42a8({ message: message , playersCanSee: playersCanSee , $html: $html  }) {
+    if (game.user.isGM) return;
+    if (!playersCanSee) {
+        if ((0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("rolls")) {
+            const $tooltips = $html.find(".dice-tooltip");
+            $tooltips.empty();
+            $tooltips.css("padding-top", 0);
+            if ((0, $b29eb7e0eb12ddbc$export$8206e8d612b3e63)("criticals")) $html.find(".dice-total").removeClass("critical fumble");
+        }
+    }
+    // target
+    const $target = $html.find(".phase-attack .token-info .token-name");
+    if (!$target) return;
+    const targetUUID = message.getFlag("wire", "activation.attack.targetActorUuid");
+    if (!targetUUID) return;
+    try {
+        const target = fromUuidSync(targetUUID)?.actor;
+        if (!target || target.hasPlayerOwner || (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(target)) return;
+        $target.text((0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(target));
+    } catch  {
+        return;
+    }
+}
+
+
 const $7dfb009370bda395$export$e881906e723788e4 = $7dfb009370bda395$var$createThirdPartyListener();
 const $7dfb009370bda395$export$8bb131958b3f64d = $7dfb009370bda395$var$createThirdPartyListener();
 const $7dfb009370bda395$export$9f8da9d492856387 = $7dfb009370bda395$var$createThirdPartyListener();
@@ -485,6 +513,7 @@ function $7dfb009370bda395$export$3f54c3168907b251() {
             $7dfb009370bda395$export$9f8da9d492856387.add((0, $befe1a89932b5fb0$export$1cab9c19b5d4cfd9));
             break;
     }
+    if ((0, $f13521bdeed07ab3$export$90835e7e06f4e75b)("wire")?.active) $7dfb009370bda395$export$9f8da9d492856387.add((0, $74a6901965f6495e$export$a0265aeb076e42a8));
 }
 function $7dfb009370bda395$var$createThirdPartyListener() {
     const a = [];
