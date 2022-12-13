@@ -44,7 +44,8 @@ function changeNames(message: ChatMessage, actor: Actor, html: JQuery) {
 
     if (!names.size) return
 
-    const joined = RegExp.escape(Array.from(names).join('|'))
+    const escaped = Array.from(names).map(x => RegExp.escape(x))
+    const joined = escaped.join('|')
     const regexp = new RegExp(`(${joined})`, 'gmi')
     const renamed = getName(actor)
     const replacement = game.user.isGM ? `<span class="anonymous-replaced" title="${renamed}">$1</span>` : renamed

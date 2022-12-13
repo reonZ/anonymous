@@ -59,7 +59,7 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
         if (message.rolls.length) {
             if (rolls) {
                 const $tags = $html.find('.flavor-text hr + .tags')
-                console.log($tags)
+
                 if ($tags.length) {
                     $tags.prev('hr').remove()
                     $tags.remove()
