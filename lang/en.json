@@ -59,6 +59,10 @@
         "context": {
             "show": "Show name to players",
             "hide": "Hide name from players"
+        },
+
+        "hud": {
+            "title": "Toggle Anonymous State"
         }
     }
 }

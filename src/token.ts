@@ -1,4 +1,5 @@
 import { getActorTokens } from './@utils/foundry/actor'
+import { localize } from './@utils/foundry/i18n'
 import { getSetting } from './@utils/foundry/settings'
 import { playersSeeName, toggleSeeName } from './api'
 
@@ -58,7 +59,7 @@ function createToggle(actor: Actor) {
     const toggled = playersSeeName(actor)
 
     tmp.innerHTML = `<div class="control-icon${toggled ? ' active' : ''}" data-action="anonymous-toggle">
-    <i class="fa-solid fa-signature"></i>
+    <i class="fa-solid fa-signature" title="${localize('hud.title')}"></i>
 </div>`
 
     return tmp.content.firstChild as HTMLDivElement

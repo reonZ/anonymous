@@ -1,3 +1,4 @@
+import { localize } from './@utils/foundry/i18n'
 import { getName, playersSeeName, toggleSeeName } from './api'
 
 export function renderCombatTracker(tracker: CombatTracker<Combat>, html: JQuery) {
@@ -29,10 +30,12 @@ export function renderCombatTracker(tracker: CombatTracker<Combat>, html: JQuery
 
 function createToggle(active: boolean) {
     const tmp = document.createElement('template')
+    const tooltip = active ? 'context.hide' : 'context.show'
 
     tmp.innerHTML = `<a
     class="combatant-control${active ? ' active' : ''}"
     data-control="toggle-name-visibility"
+    data-tooltip="${localize(tooltip)}"
 >
     <i class="fa-solid fa-signature"></i>
 </a>`
