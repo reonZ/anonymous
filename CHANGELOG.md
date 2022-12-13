@@ -1,3 +1,7 @@
+# 1.1.2
+
+-   fixed escaping bug that prevented the anonymity of actors with different names in token and alias
+
 # 1.1.1
 
 -   now also make saving throws anonymous in chat when using `Whistler's Item Rolls Extended`.

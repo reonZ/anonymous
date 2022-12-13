@@ -21,6 +21,7 @@ function $ee65ef5b7d5dd2ef$export$79b67f6e2f31449(...path) {
     return `flags.${0, $1623e5e7c705b7c7$export$2e2bcd8739ae039}.${path.join("/")}`;
 }
 function $ee65ef5b7d5dd2ef$export$bdd507c72609c24e(...path) {
+    path = path.filter((x)=>typeof x === "string");
     return `modules/${0, $1623e5e7c705b7c7$export$2e2bcd8739ae039}/templates/${path.join("/")}`;
 }
 function $ee65ef5b7d5dd2ef$export$6d1a79e7c04100c2(...path) {
@@ -146,7 +147,15 @@ function $889355b5c39241f1$export$b3bd0bc58e36cd63(key, data) {
     return game.i18n.localize(key);
 }
 function $889355b5c39241f1$export$a2435eff6fb7f6c1(subKey) {
-    return (key, data)=>$889355b5c39241f1$export$b3bd0bc58e36cd63(`${subKey}.${key}`, data);
+    const fn = (key, data)=>$889355b5c39241f1$export$b3bd0bc58e36cd63(`${subKey}.${key}`, data);
+    Object.defineProperty(fn, "key", {
+        get () {
+            return subKey;
+        },
+        enumerable: false,
+        configurable: false
+    });
+    return fn;
 }
 
 
@@ -357,6 +366,9 @@ function $f89c90010a6c8f0b$export$5ba7e9d04e0f19d(html, regexp, replacement, add
         if (el.nodeType === Node.TEXT_NODE && el.textContent?.trim()) $(el).replaceWith(el.textContent.replace(regexp, replacement));
     });
 }
+const $f89c90010a6c8f0b$export$73b3cc6e6015c1cc = {
+    preventDefault: ()=>{}
+};
 
 
 
@@ -450,7 +462,6 @@ function $6c597d232d6f5f12$export$92c83b7d19bc5f58({ message: message , playersC
         if (message.rolls.length) {
             if (rolls) {
                 const $tags = $html.find(".flavor-text hr + .tags");
-                console.log($tags);
                 if ($tags.length) {
                     $tags.prev("hr").remove();
                     $tags.remove();
@@ -572,7 +583,8 @@ function $cf4c32f03d9bb335$var$changeNames(message, actor, html) {
         if (token?.name) names.add(token.name);
     }
     if (!names.size) return;
-    const joined = RegExp.escape(Array.from(names).join("|"));
+    const escaped = Array.from(names).map((x)=>RegExp.escape(x));
+    const joined = escaped.join("|");
     const regexp = new RegExp(`(${joined})`, "gmi");
     const renamed = (0, $8435b8d847fb3eb7$export$7d9f7e9c1c02b41e)(actor);
     const replacement = game.user.isGM ? `<span class="anonymous-replaced" title="${renamed}">$1</span>` : renamed;
