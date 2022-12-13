@@ -186,6 +186,7 @@ function $2498048dd39926c2$export$b64e7dcb984d6faa(actor, connected = false) {
 
 
 
+
 function $66d137fe0087513e$export$be34e5e3e46994ad(actor, showName) {
     if (actor.token) $66d137fe0087513e$var$changeDisplayName(actor.token, showName);
     else (0, $2498048dd39926c2$export$99925ce9e702f588)(actor, true).forEach((x)=>$66d137fe0087513e$var$changeDisplayName(x, showName));
@@ -234,7 +235,7 @@ function $66d137fe0087513e$var$createToggle(actor) {
     const tmp = document.createElement("template");
     const toggled = (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(actor);
     tmp.innerHTML = `<div class="control-icon${toggled ? " active" : ""}" data-action="anonymous-toggle">
-    <i class="fa-solid fa-signature"></i>
+    <i class="fa-solid fa-signature" title="${(0, $889355b5c39241f1$export$b3bd0bc58e36cd63)("hud.title")}"></i>
 </div>`;
     return tmp.content.firstChild;
 }
@@ -595,6 +596,7 @@ function $cf4c32f03d9bb335$var$changeNames(message, actor, html) {
 
 
 
+
 function $99e5415e8dd284c4$export$bcf8b28967963762(tracker, html) {
     const combatants = ui.combat.viewed?.combatants;
     if (!combatants || !combatants.size) return;
@@ -618,9 +620,11 @@ function $99e5415e8dd284c4$export$bcf8b28967963762(tracker, html) {
 }
 function $99e5415e8dd284c4$var$createToggle(active) {
     const tmp = document.createElement("template");
+    const tooltip = active ? "context.hide" : "context.show";
     tmp.innerHTML = `<a
     class="combatant-control${active ? " active" : ""}"
     data-control="toggle-name-visibility"
+    data-tooltip="${(0, $889355b5c39241f1$export$b3bd0bc58e36cd63)(tooltip)}"
 >
     <i class="fa-solid fa-signature"></i>
 </a>`;

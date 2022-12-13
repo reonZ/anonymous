@@ -1,3 +1,7 @@
+# 1.1.3
+
+-   added tooltips for the combat tracker and token HUD
+
 # 1.1.2
 
 -   fixed escaping bug that prevented the anonymity of actors with different names in token and alias
