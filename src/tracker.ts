@@ -1,3 +1,4 @@
+import { getSameCombatants } from './@utils/foundry/combatant'
 import { localize } from './@utils/foundry/i18n'
 import { getName, playersSeeName, toggleSeeName } from './api'
 
@@ -46,5 +47,10 @@ function createToggle(active: boolean) {
 function toggleCombatantName(event: MouseEvent, combatant: Combatant) {
     event.preventDefault()
     event.stopPropagation()
-    toggleSeeName(combatant)
+
+    if (event.shiftKey && combatant.actor && combatant.actor.isToken && game.combat?.scene) {
+        getSameCombatants(combatant).forEach(toggleSeeName)
+    } else {
+        toggleSeeName(combatant)
+    }
 }
