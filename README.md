@@ -33,6 +33,8 @@ The name of creatures in the combat tracker will be "hidden" from the players wh
 
 A new icon is added allowing the GM to toggle the state. If the `Combatant` is not an actual `Actor`, the ability to show its name will still be available, but will be temporary (until the encounter ends).
 
+If `shift` is held while toggling a combatant name, all the combatants with the same original actor will have their name toggled instead. This only applies to the combatants of the current combat.
+
 # Token Nameplate
 
 Any newly created token on the board will see its nameplate "hidden" from the players when appropriate.

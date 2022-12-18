@@ -1,3 +1,7 @@
+# 1.2.0
+
+-   holding `shift` while toggling a name from the combat tracker will toggle the names of all the combatants with the same actor
+
 # 1.1.3
 
 -   added tooltips for the combat tracker and token HUD

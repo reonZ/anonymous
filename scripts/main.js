@@ -176,7 +176,10 @@ function $53cf1f1c9c92715e$export$5e165df1e30a1331(doc, key, value) {
 
 
 function $2498048dd39926c2$export$99925ce9e702f588(actor, linkedOnly = false) {
-    return game.scenes.map((scene)=>scene.tokens.filter((token)=>token.actorId === actor.id && (!linkedOnly || token.actorLink))).flat();
+    return game.scenes.map((scene)=>$2498048dd39926c2$export$52dc6c50524a752(scene, actor, linkedOnly)).flat();
+}
+function $2498048dd39926c2$export$52dc6c50524a752(scene, actor, linkedOnly = false) {
+    return scene.tokens.filter((token)=>token.actorId === actor.id && (!linkedOnly || token.actorLink));
 }
 function $2498048dd39926c2$export$b64e7dcb984d6faa(actor, connected = false) {
     if (connected) return game.users.find((x)=>x.active && x.character === actor);
@@ -595,6 +598,11 @@ function $cf4c32f03d9bb335$var$changeNames(message, actor, html) {
 
 
 
+function $fe536384d13f1c00$export$3dc64c70f98db3f5(combatant) {
+    return combatant.combat.turns.filter((x)=>x.actorId === combatant.actorId);
+}
+
+
 
 
 function $99e5415e8dd284c4$export$bcf8b28967963762(tracker, html) {
@@ -633,7 +641,8 @@ function $99e5415e8dd284c4$var$createToggle(active) {
 function $99e5415e8dd284c4$var$toggleCombatantName(event, combatant) {
     event.preventDefault();
     event.stopPropagation();
-    (0, $8435b8d847fb3eb7$export$bc948612f77bd16a)(combatant);
+    if (event.shiftKey && combatant.actor && combatant.actor.isToken && game.combat?.scene) (0, $fe536384d13f1c00$export$3dc64c70f98db3f5)(combatant).forEach((0, $8435b8d847fb3eb7$export$bc948612f77bd16a));
+    else (0, $8435b8d847fb3eb7$export$bc948612f77bd16a)(combatant);
 }
 
 
