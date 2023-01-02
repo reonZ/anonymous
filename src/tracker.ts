@@ -9,7 +9,7 @@ export function renderCombatTracker(tracker: CombatTracker<Combat>, html: JQuery
     html.find('#combat-tracker .combatant').each(function () {
         const id = this.dataset.combatantId as string
         const combatant = combatants.get(id)
-        if (!combatant || combatant.hasPlayerOwner) return
+        if (!combatant || !combatant.actor || combatant.actor.hasPlayerOwner) return
 
         const showName = playersSeeName(combatant)
 
