@@ -611,7 +611,7 @@ function $99e5415e8dd284c4$export$bcf8b28967963762(tracker, html) {
     html.find("#combat-tracker .combatant").each(function() {
         const id = this.dataset.combatantId;
         const combatant = combatants.get(id);
-        if (!combatant || combatant.hasPlayerOwner) return;
+        if (!combatant || !combatant.actor || combatant.actor.hasPlayerOwner) return;
         const showName = (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(combatant);
         if (game.user.isGM) {
             const controls = this.querySelector(".combatant-controls");

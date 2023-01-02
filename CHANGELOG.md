@@ -1,3 +1,7 @@
+# 1.2.1
+
+-   fix a bug with `pf2e` lootable combatant permission
+
 # 1.2.0
 
 -   holding `shift` while toggling a name from the combat tracker will toggle the names of all the combatants with the same actor
