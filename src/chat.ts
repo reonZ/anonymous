@@ -11,7 +11,7 @@ export function renderChatMessage(message: ChatMessage, html: JQuery) {
     const isGM = game.user.isGM
     const speaker = message.speaker
     const actor = ChatMessage.getSpeakerActor(speaker)
-    const playersCanSee = !actor || actor.hasPlayerOwner || playersSeeName(actor)
+    const playersCanSee = !actor || playersSeeName(actor)
 
     if (actor && !playersCanSee) {
         changeNames(message, actor, html)

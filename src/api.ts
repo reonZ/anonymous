@@ -8,8 +8,9 @@ import { formatUnknown, getSavedNames } from './utils'
  * @returns {boolean} the current state of visibility
  */
 export function playersSeeName(doc: Actor | Combatant): boolean {
-    if (doc instanceof Actor || !doc.actor) return !!getFlag(doc, 'showName')
-    return !!getFlag(doc.actor, 'showName')
+    if (doc instanceof Combatant && doc.actor) doc = doc.actor
+    if (doc instanceof Actor && doc.hasPlayerOwner) return true
+    return !!getFlag(doc, 'showName')
 }
 
 /**
