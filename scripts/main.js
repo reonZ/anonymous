@@ -264,8 +264,9 @@ function $fab42eb3dee39b5b$export$cd50fa6b5facbf50(unknown, type) {
 
 
 function $8435b8d847fb3eb7$export$7fd1aaec5430227(doc) {
-    if (doc instanceof Actor || !doc.actor) return !!(0, $53cf1f1c9c92715e$export$a19b74191e00c5e)(doc, "showName");
-    return !!(0, $53cf1f1c9c92715e$export$a19b74191e00c5e)(doc.actor, "showName");
+    if (doc instanceof Combatant && doc.actor) doc = doc.actor;
+    if (doc instanceof Actor && doc.hasPlayerOwner) return true;
+    return !!(0, $53cf1f1c9c92715e$export$a19b74191e00c5e)(doc, "showName");
 }
 async function $8435b8d847fb3eb7$export$bc948612f77bd16a(doc) {
     const showName = !$8435b8d847fb3eb7$export$7fd1aaec5430227(doc);
@@ -556,7 +557,7 @@ function $cf4c32f03d9bb335$export$e34687540c625f04(message, html) {
     const isGM = game.user.isGM;
     const speaker = message.speaker;
     const actor = ChatMessage.getSpeakerActor(speaker);
-    const playersCanSee = !actor || actor.hasPlayerOwner || (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(actor);
+    const playersCanSee = !actor || (0, $8435b8d847fb3eb7$export$7fd1aaec5430227)(actor);
     if (actor && !playersCanSee) {
         $cf4c32f03d9bb335$var$changeNames(message, actor, html);
         if (!isGM) {

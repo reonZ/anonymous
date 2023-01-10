@@ -1,3 +1,7 @@
+# 1.2.2
+
+-   the API function `playersSeeName` now also check if the actor is owned by a player, if so, it will always return true
+
 # 1.2.1
 
 -   fix a bug with `pf2e` lootable combatant permission
