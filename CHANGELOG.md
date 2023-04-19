@@ -1,3 +1,7 @@
+# 1.2.3
+
+-   fix issue with `pf2e` critical roll result color still showing
+
 # 1.2.2
 
 -   the API function `playersSeeName` now also check if the actor is owned by a player, if so, it will always return true
