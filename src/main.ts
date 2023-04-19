@@ -1,19 +1,20 @@
-import { getCurrentModule } from './@utils/foundry/module'
-import { registerSetting, registerSettingMenu } from './@utils/foundry/settings'
-import { isGM } from './@utils/foundry/user'
-import { registerLocalizeHelper } from './@utils/handlebars'
-import { getActorDirectoryEntryContext, onActorUpdate } from './actor'
+import { setModuleID } from '@utils/module'
+import { getCurrentModule } from '@utils/foundry/module'
+import { registerSetting, registerSettingMenu } from '@utils/foundry/settings'
+import { isGM } from '@utils/foundry/user'
 import { getName, playersSeeName, toggleSeeName } from './api'
-import { AnonymousNamesMenu } from './apps/names'
-import { renderChatMessage } from './chat'
-import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
 import { preCreateToken, renderTokenHUD } from './token'
-import { renderCombatTracker } from './tracker'
+import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
 import { refresh } from './utils'
+import { renderCombatTracker } from './tracker'
+import { renderChatMessage } from './chat'
+import { getActorDirectoryEntryContext, onActorUpdate } from './actor'
+import { AnonymousNamesMenu } from '@apps/names'
+
+export const MODULE_ID = 'anonymous'
+setModuleID(MODULE_ID)
 
 Hooks.once('init', () => {
-    registerLocalizeHelper()
-
     registerSetting({
         name: 'version',
         type: String,
@@ -67,7 +68,7 @@ Hooks.once('init', () => {
         type: AnonymousNamesMenu,
     })
 
-    getCurrentModule().api = {
+    getCurrentModule<AnonymousApi>().api = {
         playersSeeName,
         toggleSeeName,
         getName,

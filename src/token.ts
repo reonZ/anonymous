@@ -1,6 +1,6 @@
-import { getActorTokens } from './@utils/foundry/actor'
-import { localize } from './@utils/foundry/i18n'
-import { getSetting } from './@utils/foundry/settings'
+import { getActorTokens } from '@utils/foundry/actor'
+import { localize } from '@utils/foundry/localize'
+import { getSetting } from '@utils/foundry/settings'
 import { playersSeeName, toggleSeeName } from './api'
 
 export function updateActorTokens(actor: Actor, showName: boolean) {

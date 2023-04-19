@@ -1,6 +1,5 @@
-import { getSetting } from '~src/@utils/foundry/settings'
-import { getName, playersSeeName } from '~src/api'
-import { ThirdPartyChatParseArgs } from '~src/third'
+import { getName, playersSeeName } from '@src/api'
+import { getSetting } from '@utils/foundry/settings'
 
 const SAVE = /\(dc \d+\)/gim
 
@@ -25,7 +24,7 @@ export function wireParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
     // target
 
     const $target = $html.find('.phase-attack .token-info .token-name')
-    const targetUUID = message.getFlag('wire', 'activation.attack.targetActorUuid') as string | undefined
+    const targetUUID = message.getFlag('wire', 'activation.attack.targetActorUuid') as ItemUUID | undefined
     if ($target.length && targetUUID) {
         try {
             const target = (fromUuidSync(targetUUID) as TokenDocument | null)?.actor
@@ -38,7 +37,7 @@ export function wireParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
     }
 
     const $targets = $html.find('.phase-saving-throws .saving-throw-target:has(.target-name)')
-    const targetsUUID = message.getFlag('wire', 'activation.targetUuids') as string[] | undefined
+    const targetsUUID = message.getFlag('wire', 'activation.targetUuids') as ItemUUID[] | undefined
     if ($targets.length && targetsUUID?.length) {
         try {
             for (const uuid of targetsUUID) {

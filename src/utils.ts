@@ -1,5 +1,5 @@
-import { getSetting } from './@utils/foundry/settings'
-import { capitalize } from './@utils/string'
+import { getSetting } from '@utils/foundry/settings'
+import { capitalize } from '@utils/string'
 
 export function refresh() {
     ui.combat.render()

@@ -1,5 +1,5 @@
-import { getSetting } from './@utils/foundry/settings'
-import { replaceHTMLText } from './@utils/jquery'
+import { getSetting } from '@utils/foundry/settings'
+import { replaceHTMLText } from '@utils/jquery'
 import { getName, playersSeeName } from './api'
 import { thirdPartyChatParse } from './third'
 

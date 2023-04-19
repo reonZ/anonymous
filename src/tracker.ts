@@ -1,5 +1,5 @@
-import { getSameCombatants } from './@utils/foundry/combatant'
-import { localize } from './@utils/foundry/i18n'
+import { getSameCombatants } from '@utils/foundry/combatant'
+import { localize } from '@utils/foundry/localize'
 import { getName, playersSeeName, toggleSeeName } from './api'
 
 export function renderCombatTracker(tracker: CombatTracker<Combat>, html: JQuery) {

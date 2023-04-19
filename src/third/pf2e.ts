@@ -1,10 +1,9 @@
-import { getCurrentModule } from '~src/@utils/foundry/module'
-import { warn } from '~src/@utils/foundry/notifications'
-import { getSettingLocalizationPath } from '~src/@utils/foundry/path'
-import { getSetting, registerSetting } from '~src/@utils/foundry/settings'
-import { replaceHTMLText } from '~src/@utils/jquery'
-import { playersSeeName } from '~src/api'
-import type { ThirdPartyChatParseArgs } from '~src/third'
+import { getSetting, registerSetting } from '@utils/foundry/settings'
+import { getCurrentModule } from '@utils/foundry/module'
+import { getSettingLocalizationPath } from '@utils/foundry/path'
+import { warn } from '@utils/foundry/notification'
+import { playersSeeName } from '@src/api'
+import { replaceHTMLText } from '@utils/jquery'
 
 export function pf2eInitHook(isGM: boolean) {
     registerSetting({
@@ -40,7 +39,7 @@ function disableSettings() {
 
 export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatParseArgs) {
     const isGM = game.user.isGM
-    const target = (message as ChatMessagePF2e).target?.actor
+    const target = (message as ChatMessage & { target: { actor: Actor } | null }).target?.actor
     const criticals = getSetting('criticals')
     const rolls = getSetting('rolls')
 
@@ -66,7 +65,9 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
                 }
 
                 if (criticals) {
-                    $html.find('.message-content .dice-roll .dice-result .dice-total').removeClass('success failure')
+                    $html
+                        .find('.message-content .dice-roll .dice-result .dice-total')
+                        .css('color', 'var(--color-text-dark-primary)')
                 }
 
                 if (traits !== 'never') {

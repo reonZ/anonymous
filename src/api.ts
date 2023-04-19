@@ -1,5 +1,5 @@
-import { getFlag, setFlag } from './@utils/foundry/flags'
-import { localize } from './@utils/foundry/i18n'
+import { getFlag, setFlag } from '@utils/foundry/flags'
+import { localize } from '@utils/foundry/localize'
 import { updateActorTokens } from './token'
 import { formatUnknown, getSavedNames } from './utils'
 

@@ -1,6 +1,5 @@
-import { getSetting } from '~src/@utils/foundry/settings'
-import { replaceHTMLText } from '~src/@utils/jquery'
-import type { ThirdPartyChatParseArgs } from '~src/third'
+import { getSetting } from '@utils/foundry/settings'
+import { replaceHTMLText } from '@utils/jquery'
 
 export function dnd5ParseChat({ message, $html, playersCanSee }: ThirdPartyChatParseArgs) {
     if (playersCanSee) return

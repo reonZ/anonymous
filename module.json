@@ -9,21 +9,9 @@
             "discord": "Idle#3251"
         }
     ],
-    "esmodules": [
-        "scripts/main.js"
-    ],
-    "styles": [
-        "styles/styles.css"
-    ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "lang/en.json"
-        }
-    ],
+    "esmodules": ["scripts/main.js"],
     "compatibility": {
-        "minimum": "10.290",
+        "minimum": "10.291",
         "verified": "10"
     },
     "version": "1.2.2",
@@ -32,6 +20,14 @@
     "readme": "https://github.com/reonZ/anonymous/blob/master/README.md",
     "manifest": "https://raw.githubusercontent.com/reonZ/anonymous/master/module.json",
     "download": "https://github.com/reonZ/anonymous/releases/download/1.2.2/module.zip",
-    "changelog": "https://github.com/reonZ/anonymous/releases",
-    "bugs": "https://github.com/reonZ/anonymous/issues"
+    "changelog": "https://github.com/reonZ/anonymous/blob/master/CHANGELOG.md",
+    "bugs": "https://github.com/reonZ/anonymous/issues",
+    "styles": ["styles/styles.css"],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        }
+    ]
 }

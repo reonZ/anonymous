@@ -1,14 +1,7 @@
-import { getModule } from './@utils/foundry/module'
+import { getModule } from '@utils/foundry/module'
 import { dnd5ParseChat } from './third/dnd5e'
 import { pf2eInitHook, pf2eParseChat, pf2eReadyHook } from './third/pf2e'
 import { wireParseChat } from './third/wire'
-
-export interface ThirdPartyChatParseArgs {
-    playersCanSee: boolean
-    message: ChatMessage
-    actor: Actor | null
-    $html: JQuery
-}
 
 export const thirdPartyInitHooks = createThirdPartyListener<[isGM: boolean]>()
 export const thirdPartyReadyHooks = createThirdPartyListener<[isGM: boolean]>()

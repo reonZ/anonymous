@@ -2,7 +2,8 @@
     "compilerOptions": {
         "target": "esnext",
         "module": "esnext",
-        "lib": ["esnext", "dom"],
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
         "strict": true,
         "strictNullChecks": true,
         "strictPropertyInitialization": true,
@@ -10,10 +11,16 @@
         "strictFunctionTypes": true,
         "experimentalDecorators": true,
         "esModuleInterop": true,
+        "sourceMap": true,
         "forceConsistentCasingInFileNames": true,
+        "noUncheckedIndexedAccess": true,
         "baseUrl": ".",
         "paths": {
-            "~*": ["./*"]
+            "@utils/*": ["D:/foundryVTT-projects/@utils/*"],
+            "@apps/*": ["src/apps/*"],
+            "@src/*": ["src/*"]
         }
-    }
+    },
+
+    "include": ["src/**/*", "D:/foundryVTT-projects/@utils/**/*", "D:/foundryVTT-projects/@types/**/*"]
 }

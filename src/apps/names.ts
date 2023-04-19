@@ -1,8 +1,7 @@
-import { localize } from '~src/@utils/foundry/i18n'
-import { templatePath } from '~src/@utils/foundry/path'
-import { setSetting } from '~src/@utils/foundry/settings'
-import { getActorsTypes } from '~src/@utils/foundry/types'
-import { formatUnknown, getSavedNames } from '~src/utils'
+import { formatUnknown, getSavedNames } from '@src/utils'
+import { localize, subLocalize } from '@utils/foundry/localize'
+import { templatePath } from '@utils/foundry/path'
+import { setSetting } from '@utils/foundry/settings'
 
 export class AnonymousNamesMenu extends FormApplication {
     static get defaultOptions() {
@@ -17,7 +16,7 @@ export class AnonymousNamesMenu extends FormApplication {
     getData(options?: Partial<FormApplicationOptions> | undefined) {
         const unknown = localize('unknown')
         const saved = getSavedNames()
-        const types = getActorsTypes().map(x => ({
+        const types = game.system.documentTypes.Actor.map(x => ({
             type: x,
             value: (saved[x] ?? '').trim(),
             placeholder: formatUnknown(unknown, x),
@@ -25,6 +24,7 @@ export class AnonymousNamesMenu extends FormApplication {
         return {
             ...super.getData(options),
             types,
+            i18n: subLocalize('templates.names'),
         }
     }
 
