@@ -1,3 +1,9 @@
+# 1.3.0
+
+the module now dissociates names and others settings when it comes to anonymity: up till now, if an actor's anonymity was removed, all the features of the module were disabled for said actor. with this version, while the actor's name will still be revealed, the other features will remain (hidding chat rolls, etc..)
+
+-   now displays `Target: Unknown` instead of removing the line from the chat card in `pf2e` system
+
 # 1.2.3
 
 -   fix issue with `pf2e` critical roll result color still showing
