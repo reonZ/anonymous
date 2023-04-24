@@ -3,10 +3,10 @@ import { getSetting } from '@utils/foundry/settings'
 
 const SAVE = /\(dc \d+\)/gim
 
-export function wireParseChat({ message, playersCanSee, $html }: ThirdPartyChatParseArgs) {
+export function wireParseChat({ message, isAnonymous, $html }: ThirdPartyChatParseArgs) {
     if (game.user.isGM) return
 
-    if (!playersCanSee) {
+    if (isAnonymous) {
         if (getSetting('rolls')) {
             const $tooltips = $html.find('.dice-tooltip')
             $tooltips.empty()

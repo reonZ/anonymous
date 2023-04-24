@@ -3,8 +3,6 @@ import { replaceHTMLText } from '@utils/jquery'
 import { getName, playersSeeName } from './api'
 import { thirdPartyChatParse } from './third'
 
-const ESCAPE = /(["'\(\)\[\]])/gm
-
 export function renderChatMessage(message: ChatMessage, html: JQuery) {
     if (message.blind) return
 
@@ -12,21 +10,21 @@ export function renderChatMessage(message: ChatMessage, html: JQuery) {
     const speaker = message.speaker
     const actor = ChatMessage.getSpeakerActor(speaker)
     const playersCanSee = !actor || playersSeeName(actor)
+    const isAnonymous = !!actor && !actor.hasPlayerOwner
 
-    if (actor && !playersCanSee) {
-        changeNames(message, actor, html)
-        if (!isGM) {
-            if (message.rolls.length && getSetting('rolls')) {
-                const $result = html.find('.message-content .dice-roll .dice-result')
-                $result.find('.dice-formula, .dice-tooltip').remove()
-                if (getSetting('criticals')) $result.find('.dice-total').removeClass('critical fumble')
-            }
-            if (getSetting('footer')) html.find('.message-content footer.card-footer').remove()
-            if (getSetting('cardContent')) html.find('.message-content .card-content').remove()
+    if (actor && !playersCanSee) changeNames(message, actor, html)
+
+    if (!isGM && isAnonymous) {
+        if (message.rolls.length && getSetting('rolls')) {
+            const $result = html.find('.message-content .dice-roll .dice-result')
+            $result.find('.dice-formula, .dice-tooltip').remove()
+            if (getSetting('criticals')) $result.find('.dice-total').removeClass('critical fumble')
         }
+        if (getSetting('footer')) html.find('.message-content footer.card-footer').remove()
+        if (getSetting('cardContent')) html.find('.message-content .card-content').remove()
     }
 
-    thirdPartyChatParse({ message, actor, $html: html, playersCanSee })
+    thirdPartyChatParse({ message, actor, $html: html, playersCanSee, isAnonymous })
 }
 
 function changeNames(message: ChatMessage, actor: Actor, html: JQuery) {

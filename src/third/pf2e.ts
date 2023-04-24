@@ -2,8 +2,9 @@ import { getSetting, registerSetting } from '@utils/foundry/settings'
 import { getCurrentModule } from '@utils/foundry/module'
 import { getSettingLocalizationPath } from '@utils/foundry/path'
 import { warn } from '@utils/foundry/notification'
-import { playersSeeName } from '@src/api'
+import { getName, playersSeeName } from '@src/api'
 import { replaceHTMLText } from '@utils/jquery'
+import { localize } from '@utils/foundry/localize'
 
 export function pf2eInitHook(isGM: boolean) {
     registerSetting({
@@ -37,7 +38,7 @@ function disableSettings() {
     warn('pf2e.disabled', { module, setting }, true)
 }
 
-export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatParseArgs) {
+export function pf2eParseChat({ message, isAnonymous, $html }: ThirdPartyChatParseArgs) {
     const isGM = game.user.isGM
     const target = (message as ChatMessage & { target: { actor: Actor } | null }).target?.actor
     const criticals = getSetting('criticals')
@@ -48,11 +49,11 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
         if ($targets.length) {
             const $target = $targets.first()
             if (isGM) $target.attr('data-visibility', 'gm')
-            else $target.remove()
+            else $target.text(localize('pf2e.target', { name: getName(target) }))
         }
     }
 
-    if (!isGM && !playersCanSee) {
+    if (!isGM && isAnonymous) {
         const traits = getSetting('pf2e.traits')
 
         if (message.rolls.length) {
@@ -81,7 +82,7 @@ export function pf2eParseChat({ message, playersCanSee, $html }: ThirdPartyChatP
         }
     }
 
-    if (!playersCanSee && message.rolls.length && rolls && criticals) {
+    if (isAnonymous && message.rolls.length && rolls && criticals) {
         const critical = game.i18n.localize('PF2E.Check.Result.Degree.Attack.criticalSuccess')
         const hit = game.i18n.localize('PF2E.Check.Result.Degree.Attack.success')
         const regex = new RegExp(`(\\((${critical}|${hit})\\))`, 'gmi')
