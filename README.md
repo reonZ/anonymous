@@ -1,5 +1,7 @@
 # FoundryVTT Anonymous
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K6M2V13)
+
 This module will attempt to make any "creature" that is not owned by a player anonymous across the foundry. It will also offer the ability to toggle the showing of a creature's name individually.
 
 -   [Combat Tracker](#combat-tracker)
