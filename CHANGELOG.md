@@ -1,3 +1,7 @@
+# 1.4.1
+
+-   fixed token nameplates not automatically refreshing when toggling anonymity
+
 # 1.4.0
 
 -   just a manifest update for v11, no work was actually done for it
