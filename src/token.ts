@@ -71,3 +71,8 @@ export function preCreateToken(token: TokenDocument) {
     const swap = swapToHide(displayName)
     if (swap !== displayName) token._source.displayName = swap
 }
+
+export function updateToken(token: TokenDocument, data: object) {
+    // FIXME i don't understand why this has to happen or why it needs to be `refreshState` instead of `refreshNameplate`
+    if ('displayName' in data) token.object?.renderFlags.set({ refreshState: true })
+}

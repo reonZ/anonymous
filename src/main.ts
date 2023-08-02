@@ -3,7 +3,7 @@ import { getCurrentModule } from '@utils/foundry/module'
 import { registerSetting, registerSettingMenu } from '@utils/foundry/settings'
 import { isGM } from '@utils/foundry/user'
 import { getName, playersSeeName, toggleSeeName } from './api'
-import { preCreateToken, renderTokenHUD } from './token'
+import { preCreateToken, renderTokenHUD, updateToken } from './token'
 import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
 import { refresh } from './utils'
 import { renderCombatTracker } from './tracker'
@@ -93,3 +93,4 @@ Hooks.on('renderCombatTracker', renderCombatTracker)
 Hooks.on('renderChatMessage', renderChatMessage)
 Hooks.on('preCreateToken', preCreateToken)
 Hooks.on('updateActor', onActorUpdate)
+Hooks.on('updateToken', updateToken)
