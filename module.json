@@ -9,11 +9,9 @@
             "discord": "Idle#3251"
         }
     ],
-    "esmodules": [
-        "scripts/main.js"
-    ],
+    "esmodules": ["scripts/main.js"],
     "compatibility": {
-        "minimum": "10.291",
+        "minimum": "11.307",
         "verified": "11"
     },
     "version": "1.4.1",
@@ -24,9 +22,7 @@
     "download": "https://github.com/reonZ/anonymous/releases/download/1.4.1/module.zip",
     "changelog": "https://github.com/reonZ/anonymous/blob/master/CHANGELOG.md",
     "bugs": "https://github.com/reonZ/anonymous/issues",
-    "styles": [
-        "styles/styles.css"
-    ],
+    "styles": ["styles/styles.css"],
     "languages": [
         {
             "lang": "en",

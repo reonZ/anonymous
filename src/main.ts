@@ -1,15 +1,15 @@
-import { setModuleID } from '@utils/module'
+import { AnonymousNamesMenu } from '@apps/names'
 import { getCurrentModule } from '@utils/foundry/module'
 import { registerSetting, registerSettingMenu } from '@utils/foundry/settings'
 import { isGM } from '@utils/foundry/user'
-import { getName, playersSeeName, toggleSeeName } from './api'
-import { preCreateToken, renderTokenHUD, updateToken } from './token'
-import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
-import { refresh } from './utils'
-import { renderCombatTracker } from './tracker'
-import { renderChatMessage } from './chat'
+import { setModuleID } from '@utils/module'
 import { getActorDirectoryEntryContext, onActorUpdate } from './actor'
-import { AnonymousNamesMenu } from '@apps/names'
+import { getName, playersSeeName, toggleSeeName } from './api'
+import { renderChatMessage } from './chat'
+import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
+import { preCreateToken, renderTokenHUD } from './token'
+import { renderCombatTracker } from './tracker'
+import { refresh } from './utils'
 
 export const MODULE_ID = 'anonymous'
 setModuleID(MODULE_ID)
@@ -93,4 +93,3 @@ Hooks.on('renderCombatTracker', renderCombatTracker)
 Hooks.on('renderChatMessage', renderChatMessage)
 Hooks.on('preCreateToken', preCreateToken)
 Hooks.on('updateActor', onActorUpdate)
-Hooks.on('updateToken', updateToken)
