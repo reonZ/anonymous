@@ -1,9 +1,9 @@
-import { getName, playersSeeName } from '@src/api'
-import { getSetting } from '@utils/foundry/settings'
+import { getName, playersSeeName } from '../api'
+import { getSetting } from '../module'
 
 const SAVE = /\(dc \d+\)/gim
 
-export function wireParseChat({ message, isAnonymous, $html }: ThirdPartyChatParseArgs) {
+export function wireParseChat({ message, isAnonymous, $html }) {
     if (game.user.isGM) return
 
     if (isAnonymous) {
@@ -24,10 +24,10 @@ export function wireParseChat({ message, isAnonymous, $html }: ThirdPartyChatPar
     // target
 
     const $target = $html.find('.phase-attack .token-info .token-name')
-    const targetUUID = message.getFlag('wire', 'activation.attack.targetActorUuid') as ItemUUID | undefined
+    const targetUUID = message.getFlag('wire', 'activation.attack.targetActorUuid')
     if ($target.length && targetUUID) {
         try {
-            const target = (fromUuidSync(targetUUID) as TokenDocument | null)?.actor
+            const target = fromUuidSync(targetUUID)?.actor
             if (target && !target.hasPlayerOwner && !playersSeeName(target)) {
                 $target.text(getName(target))
             }
@@ -37,11 +37,11 @@ export function wireParseChat({ message, isAnonymous, $html }: ThirdPartyChatPar
     }
 
     const $targets = $html.find('.phase-saving-throws .saving-throw-target:has(.target-name)')
-    const targetsUUID = message.getFlag('wire', 'activation.targetUuids') as ItemUUID[] | undefined
+    const targetsUUID = message.getFlag('wire', 'activation.targetUuids')
     if ($targets.length && targetsUUID?.length) {
         try {
             for (const uuid of targetsUUID) {
-                const target = (fromUuidSync(uuid) as TokenDocument | null)?.actor
+                const target = fromUuidSync(uuid)?.actor
                 if (target && !target.hasPlayerOwner && !playersSeeName(target)) {
                     $targets.filter(`[data-actor-id="${uuid}"]`).find('.target-name').text(getName(target))
                 }

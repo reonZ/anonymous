@@ -1,20 +1,19 @@
-import { getSameCombatants } from '@utils/foundry/combatant'
-import { localize } from '@utils/foundry/localize'
 import { getName, playersSeeName, toggleSeeName } from './api'
+import { getSameCombatants, localize } from './module'
 
-export function renderCombatTracker(tracker: CombatTracker<Combat>, html: JQuery) {
+export function renderCombatTracker(tracker, html) {
     const combatants = ui.combat.viewed?.combatants
     if (!combatants || !combatants.size) return
 
     html.find('#combat-tracker .combatant').each(function () {
-        const id = this.dataset.combatantId as string
+        const id = this.dataset.combatantId
         const combatant = combatants.get(id)
         if (!combatant || !combatant.actor || combatant.actor.hasPlayerOwner) return
 
         const showName = playersSeeName(combatant)
 
         if (game.user.isGM) {
-            const controls = this.querySelector('.combatant-controls') as HTMLElement
+            const controls = this.querySelector('.combatant-controls')
             const hidden = controls.querySelector('.combatant-control[data-control="toggleHidden"]')
             const toggle = createToggle(showName)
 
@@ -23,13 +22,24 @@ export function renderCombatTracker(tracker: CombatTracker<Combat>, html: JQuery
             if (hidden) hidden.after(toggle)
             else controls.appendChild(toggle)
         } else if (!showName) {
-            const h4 = this.querySelector('h4') as HTMLElement
+            const h4 = this.querySelector('h4')
             h4.textContent = getName(combatant)
         }
     })
 }
 
-function createToggle(active: boolean) {
+function toggleCombatantName(event, combatant) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    if (event.shiftKey && combatant.actor && combatant.actor.isToken && game.combat?.scene) {
+        getSameCombatants(combatant).forEach(toggleSeeName)
+    } else {
+        toggleSeeName(combatant)
+    }
+}
+
+function createToggle(active) {
     const tmp = document.createElement('template')
     const tooltip = active ? 'context.hide' : 'context.show'
 
@@ -41,16 +51,5 @@ function createToggle(active: boolean) {
     <i class="fa-solid fa-signature"></i>
 </a>`
 
-    return tmp.content.firstChild as HTMLAnchorElement
-}
-
-function toggleCombatantName(event: MouseEvent, combatant: Combatant) {
-    event.preventDefault()
-    event.stopPropagation()
-
-    if (event.shiftKey && combatant.actor && combatant.actor.isToken && game.combat?.scene) {
-        getSameCombatants(combatant).forEach(toggleSeeName)
-    } else {
-        toggleSeeName(combatant)
-    }
+    return tmp.content.firstChild
 }

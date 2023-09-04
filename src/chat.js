@@ -1,9 +1,8 @@
-import { getSetting } from '@utils/foundry/settings'
-import { replaceHTMLText } from '@utils/jquery'
 import { getName, playersSeeName } from './api'
+import { getSetting, replaceHTMLText } from './module'
 import { thirdPartyChatParse } from './third'
 
-export function renderChatMessage(message: ChatMessage, html: JQuery) {
+export function renderChatMessage(message, html) {
     if (message.blind) return
 
     const isGM = game.user.isGM
@@ -27,9 +26,9 @@ export function renderChatMessage(message: ChatMessage, html: JQuery) {
     thirdPartyChatParse({ message, actor, $html: html, playersCanSee, isAnonymous })
 }
 
-function changeNames(message: ChatMessage, actor: Actor, html: JQuery) {
+function changeNames(message, actor, html) {
     const speaker = message.speaker
-    const names: Set<string> = new Set()
+    const names = new Set()
 
     if (speaker.alias) names.add(speaker.alias)
     if (actor.name) names.add(actor.name)

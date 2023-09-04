@@ -1,7 +1,6 @@
-import { getSetting } from '@utils/foundry/settings'
-import { replaceHTMLText } from '@utils/jquery'
+import { getSetting, replaceHTMLText } from '../module'
 
-export function dnd5ParseChat({ message, $html, isAnonymous, actor }: ThirdPartyChatParseArgs) {
+export function dnd5ParseChat({ message, $html, isAnonymous, actor }) {
     if (!isAnonymous) return
 
     if (message.rolls.length && getSetting('criticals')) {
@@ -13,5 +12,3 @@ export function dnd5ParseChat({ message, $html, isAnonymous, actor }: ThirdParty
         replaceHTMLText($flavor, regexp, '', true)
     }
 }
-
-export function dnd5InitHook(isGM: boolean) {}

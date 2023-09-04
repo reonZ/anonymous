@@ -1,12 +1,15 @@
-import { getSetting, registerSetting } from '@utils/foundry/settings'
-import { getCurrentModule } from '@utils/foundry/module'
-import { getSettingLocalizationPath } from '@utils/foundry/path'
-import { warn } from '@utils/foundry/notification'
-import { getName, playersSeeName } from '@src/api'
-import { replaceHTMLText } from '@utils/jquery'
-import { localize } from '@utils/foundry/localize'
+import { getName, playersSeeName } from '../api'
+import {
+    getCurrentModule,
+    getSetting,
+    getSettingLocalizationPath,
+    localize,
+    registerSetting,
+    replaceHTMLText,
+    warn,
+} from '../module'
 
-export function pf2eInitHook(isGM: boolean) {
+export function pf2eInitHook(isGM) {
     registerSetting({
         name: 'pf2e.traits',
         type: String,
@@ -20,8 +23,7 @@ export function pf2eInitHook(isGM: boolean) {
     })
 }
 
-/** @type {ThirdPartyHook} */
-export function pf2eReadyHook(isGM: boolean) {
+export function pf2eReadyHook(isGM) {
     if (isGM) disableSettings()
 }
 
@@ -38,9 +40,9 @@ function disableSettings() {
     warn('pf2e.disabled', { module, setting }, true)
 }
 
-export function pf2eParseChat({ message, isAnonymous, $html }: ThirdPartyChatParseArgs) {
+export function pf2eParseChat({ message, isAnonymous, $html }) {
     const isGM = game.user.isGM
-    const target = (message as ChatMessage & { target: { actor: Actor } | null }).target?.actor
+    const target = message.target?.actor
     const criticals = getSetting('criticals')
     const rolls = getSetting('rolls')
 

@@ -1,18 +1,11 @@
-import { AnonymousNamesMenu } from '@apps/names'
-import { getCurrentModule } from '@utils/foundry/module'
-import { registerSetting, registerSettingMenu } from '@utils/foundry/settings'
-import { isGM } from '@utils/foundry/user'
-import { setModuleID } from '@utils/module'
 import { getActorDirectoryEntryContext, onActorUpdate } from './actor'
-import { getName, playersSeeName, toggleSeeName } from './api'
+import { refresh } from './api'
+import { AnonymousNamesMenu } from './apps/names'
 import { renderChatMessage } from './chat'
+import { isGM, registerSetting, registerSettingMenu } from './module'
 import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
 import { preCreateToken, renderTokenHUD } from './token'
 import { renderCombatTracker } from './tracker'
-import { refresh } from './utils'
-
-export const MODULE_ID = 'anonymous'
-setModuleID(MODULE_ID)
 
 Hooks.once('init', () => {
     registerSetting({
@@ -67,12 +60,6 @@ Hooks.once('init', () => {
         name: 'namesMenu',
         type: AnonymousNamesMenu,
     })
-
-    getCurrentModule<AnonymousApi>().api = {
-        playersSeeName,
-        toggleSeeName,
-        getName,
-    }
 
     const gm = isGM()
 

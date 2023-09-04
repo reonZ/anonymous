@@ -1,7 +1,5 @@
-import { formatUnknown, getSavedNames } from '@src/utils'
-import { localize, subLocalize } from '@utils/foundry/localize'
-import { templatePath } from '@utils/foundry/path'
-import { setSetting } from '@utils/foundry/settings'
+import { formatUnknown, getSavedNames } from '../api'
+import { localize, setSetting, subLocalize, templatePath } from '../module'
 
 export class AnonymousNamesMenu extends FormApplication {
     static get defaultOptions() {
@@ -13,7 +11,7 @@ export class AnonymousNamesMenu extends FormApplication {
         })
     }
 
-    getData(options?: Partial<FormApplicationOptions> | undefined) {
+    getData(options) {
         const unknown = localize('unknown')
         const saved = getSavedNames()
         const types = game.system.documentTypes.Actor.map(x => ({
@@ -28,12 +26,12 @@ export class AnonymousNamesMenu extends FormApplication {
         }
     }
 
-    activateListeners(html: JQuery) {
+    activateListeners(html) {
         super.activateListeners(html)
         html.find('[data-action=cancel]').on('click', () => this.close())
     }
 
-    protected async _updateObject(event: Event, formData: Record<string, unknown>) {
+    async _updateObject(event, formData) {
         setSetting('names', formData)
     }
 }
