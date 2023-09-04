@@ -1,3 +1,7 @@
+# 1.4.3
+
+-   fixed rename regex catching partials
+
 # 1.4.2
 
 -   removed the fix that was added in `1.4.1` (foundry `11.307` fixed the issue)
