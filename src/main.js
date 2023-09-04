@@ -1,8 +1,8 @@
 import { getActorDirectoryEntryContext, onActorUpdate } from './actor'
-import { refresh } from './api'
+import { getName, playersSeeName, refresh, toggleSeeName } from './api'
 import { AnonymousNamesMenu } from './apps/names'
 import { renderChatMessage } from './chat'
-import { isGM, registerSetting, registerSettingMenu } from './module'
+import { getCurrentModule, isGM, registerSetting, registerSettingMenu } from './module'
 import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
 import { preCreateToken, renderTokenHUD } from './token'
 import { renderCombatTracker } from './tracker'
@@ -60,6 +60,12 @@ Hooks.once('init', () => {
         name: 'namesMenu',
         type: AnonymousNamesMenu,
     })
+
+    getCurrentModule().api = {
+        playersSeeName,
+        toggleSeeName,
+        getName,
+    }
 
     const gm = isGM()
 
