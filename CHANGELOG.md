@@ -1,3 +1,7 @@
+# 1.4.4
+
+-   fixed API bug introduced in the `1.4.3`
+
 # 1.4.3
 
 -   fixed rename regex catching partials
