@@ -16,10 +16,23 @@ export function renderTokenHUD(hud, html) {
 }
 
 export function preCreateToken(token) {
-    if (token.actor?.hasPlayerOwner) return
+    const actor = token.actor
+    if (!actor || actor?.hasPlayerOwner) return
+
     const displayName = token.displayName
-    const swap = swapToHide(displayName)
-    if (swap !== displayName) token._source.displayName = swap
+    const seeName = playersSeeName(token.actor)
+    const shows = isShowing(displayName)
+
+    let swap = displayName
+    if (seeName && !shows && getSetting('token')) {
+        swap = swapToShow(displayName)
+    } else if (!seeName && shows) {
+        swap = swapToHide(displayName)
+    }
+
+    if (swap !== displayName) {
+        token.updateSource({ displayName: swap })
+    }
 }
 
 function createToggle(actor) {
@@ -42,11 +55,10 @@ function showTokenName(token) {
     const displayName = token.displayName
     if (isShowing(displayName) || !getSetting('token')) return
 
-    let swap = displayName
-    if (swap === CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER) swap = CONST.TOKEN_DISPLAY_MODES.HOVER
-    else if (swap === CONST.TOKEN_DISPLAY_MODES.OWNER) swap = CONST.TOKEN_DISPLAY_MODES.ALWAYS
-
-    token.update({ displayName: swap })
+    let swap = swapToShow(displayName)
+    if (swap !== displayName) {
+        token.update({ displayName: swap })
+    }
 }
 
 function hideTokenName(token) {
@@ -67,5 +79,11 @@ function isShowing(displayName) {
 function swapToHide(displayName) {
     if (displayName === CONST.TOKEN_DISPLAY_MODES.HOVER) return CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER
     if (displayName === CONST.TOKEN_DISPLAY_MODES.ALWAYS) return CONST.TOKEN_DISPLAY_MODES.OWNER
+    return displayName
+}
+
+function swapToShow(displayName) {
+    if (displayName === CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER) return CONST.TOKEN_DISPLAY_MODES.HOVER
+    if (displayName === CONST.TOKEN_DISPLAY_MODES.OWNER) return CONST.TOKEN_DISPLAY_MODES.ALWAYS
     return displayName
 }
