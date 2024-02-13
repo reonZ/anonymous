@@ -1,3 +1,8 @@
+# 1.5.0
+
+-   updated to be compatibile with `Dungeons & Dragons Fifth Edition` version `3.0`
+-   fixed issue with nameplates not always swapping to the desired state when creating a new token
+
 # 1.4.4
 
 -   fixed API bug introduced in the `1.4.3`
