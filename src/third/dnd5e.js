@@ -12,3 +12,7 @@ export function dnd5ParseChat({ message, $html, isAnonymous, actor }) {
         replaceHTMLText($flavor, regexp, '', true)
     }
 }
+
+export function isDnD3() {
+    return game.system.id === 'dnd5e' && isNewerVersion(game.system.version, '2.999.0')
+}

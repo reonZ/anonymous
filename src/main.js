@@ -4,6 +4,7 @@ import { AnonymousNamesMenu } from './apps/names'
 import { renderChatMessage } from './chat'
 import { getCurrentModule, isGM, registerSetting, registerSettingMenu } from './module'
 import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
+import { isDnD3 } from './third/dnd5e'
 import { preCreateToken, renderTokenHUD } from './token'
 import { renderCombatTracker } from './tracker'
 
@@ -76,13 +77,13 @@ Hooks.once('init', () => {
 
     thirdPartyInitialization()
     thirdPartyInitHooks(gm)
+
+    Hooks.on('renderCombatTracker', renderCombatTracker)
+    Hooks.on(isDnD3 ? 'dnd5e.renderChatMessage' : 'renderChatMessage', renderChatMessage)
+    Hooks.on('preCreateToken', preCreateToken)
+    Hooks.on('updateActor', onActorUpdate)
 })
 
 Hooks.once('ready', () => {
     thirdPartyReadyHooks(game.user.isGM)
 })
-
-Hooks.on('renderCombatTracker', renderCombatTracker)
-Hooks.on('renderChatMessage', renderChatMessage)
-Hooks.on('preCreateToken', preCreateToken)
-Hooks.on('updateActor', onActorUpdate)

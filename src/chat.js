@@ -5,6 +5,8 @@ import { thirdPartyChatParse } from './third'
 export function renderChatMessage(message, html) {
     if (message.blind) return
 
+    html = html instanceof HTMLElement ? $(html) : html
+
     const isGM = game.user.isGM
     const speaker = message.speaker
     const actor = ChatMessage.getSpeakerActor(speaker)
