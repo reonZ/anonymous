@@ -1,89 +1,89 @@
-import { getActorDirectoryEntryContext, onActorUpdate } from './actor'
-import { getName, playersSeeName, refresh, toggleSeeName } from './api'
-import { AnonymousNamesMenu } from './apps/names'
-import { renderChatMessage } from './chat'
-import { getCurrentModule, isGM, registerSetting, registerSettingMenu } from './module'
-import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from './third'
-import { isDnD3 } from './third/dnd5e'
-import { preCreateToken, renderTokenHUD } from './token'
-import { renderCombatTracker } from './tracker'
+import { getActorDirectoryEntryContext, onActorUpdate } from "./actor";
+import { getName, playersSeeName, refresh, toggleSeeName } from "./api";
+import { AnonymousNamesMenu } from "./apps/names";
+import { renderChatMessage } from "./chat";
+import { getCurrentModule, isGM, registerSetting, registerSettingMenu } from "./module";
+import { thirdPartyInitHooks, thirdPartyInitialization, thirdPartyReadyHooks } from "./third";
+import { isDnD3 } from "./third/dnd5e";
+import { preCreateToken, renderTokenHUD } from "./token";
+import { renderCombatTracker } from "./tracker";
 
-Hooks.once('init', () => {
+Hooks.once("init", () => {
     registerSetting({
-        name: 'version',
+        name: "version",
         type: String,
-        default: '',
-    })
+        default: "",
+    });
 
     registerSetting({
-        name: 'names',
+        name: "names",
         type: Object,
         default: {},
         onChange: refresh,
-    })
+    });
 
     registerSetting({
-        name: 'token',
+        name: "token",
         type: Boolean,
         default: true,
         config: true,
-    })
+    });
 
     registerSetting({
-        name: 'rolls',
+        name: "rolls",
         type: Boolean,
         default: true,
         config: true,
-    })
+    });
 
     registerSetting({
-        name: 'criticals',
+        name: "criticals",
         type: Boolean,
         default: true,
         config: true,
-    })
+    });
 
     registerSetting({
-        name: 'cardContent',
+        name: "cardContent",
         type: Boolean,
         default: false,
         config: true,
-    })
+    });
 
     registerSetting({
-        name: 'footer',
+        name: "footer",
         type: Boolean,
         default: false,
         config: true,
-    })
+    });
 
     registerSettingMenu({
-        name: 'namesMenu',
+        name: "namesMenu",
         type: AnonymousNamesMenu,
-    })
+    });
 
     getCurrentModule().api = {
         playersSeeName,
         toggleSeeName,
         getName,
-    }
+    };
 
-    const gm = isGM()
+    const gm = isGM();
 
     if (gm) {
-        Hooks.on('getActorDirectoryEntryContext', getActorDirectoryEntryContext)
-        Hooks.on('renderTokenHUD', renderTokenHUD)
+        Hooks.on("getActorDirectoryEntryContext", getActorDirectoryEntryContext);
+        Hooks.on("renderTokenHUD", renderTokenHUD);
     }
 
-    thirdPartyInitialization()
-    thirdPartyInitHooks(gm)
+    thirdPartyInitialization();
+    thirdPartyInitHooks(gm);
 
-    Hooks.on('renderCombatTracker', renderCombatTracker)
-    Hooks.on(isDnD3 ? 'dnd5e.renderChatMessage' : 'renderChatMessage', renderChatMessage)
-    Hooks.on('preCreateToken', preCreateToken)
-    Hooks.on('updateActor', onActorUpdate)
-})
+    Hooks.on("renderCombatTracker", renderCombatTracker);
+    Hooks.on(isDnD3() ? "dnd5e.renderChatMessage" : "renderChatMessage", renderChatMessage);
+    Hooks.on("preCreateToken", preCreateToken);
+    Hooks.on("updateActor", onActorUpdate);
+});
 
-Hooks.once('ready', () => {
-    thirdPartyReadyHooks(game.user.isGM)
-})
+Hooks.once("ready", () => {
+    thirdPartyReadyHooks(game.user.isGM);
+});
