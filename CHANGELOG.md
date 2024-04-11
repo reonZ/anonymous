@@ -1,6 +1,10 @@
+# 1.5.1
+
+-   fixed issue brought by the added compatibility for d&d 3.0
+
 # 1.5.0
 
--   updated to be compatibile with `Dungeons & Dragons Fifth Edition` version `3.0`
+-   updated to be compatible with `Dungeons & Dragons Fifth Edition` version `3.0`
 -   fixed issue with nameplates not always swapping to the desired state when creating a new token
 
 # 1.4.4
