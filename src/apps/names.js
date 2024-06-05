@@ -3,7 +3,7 @@ import { localize, setSetting, subLocalize, templatePath } from '../module'
 
 export class AnonymousNamesMenu extends FormApplication {
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             id: 'anonymous-names-menu',
             title: localize('templates.names.title'),
             template: templatePath('names.html'),
@@ -14,7 +14,7 @@ export class AnonymousNamesMenu extends FormApplication {
     getData(options) {
         const unknown = localize('unknown')
         const saved = getSavedNames()
-        const types = game.system.documentTypes.Actor.map(x => ({
+        const types = Reflect.ownKeys(game.system.documentTypes.Actor).map(x => ({
             type: x,
             value: (saved[x] ?? '').trim(),
             placeholder: formatUnknown(unknown, x),
