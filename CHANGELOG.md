@@ -1,3 +1,7 @@
+# 1.6.0
+
+-   updated the module to be compatible with foundry v12
+
 # 1.5.1
 
 -   fixed issue brought by the added compatibility for d&d 3.0

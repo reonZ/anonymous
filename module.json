@@ -1,7 +1,6 @@
 {
     "id": "anonymous",
     "title": "Anonymous",
-    "author": "Idle",
     "description": "Makes non player-owned creatures anonymous across the foundry",
     "authors": [
         {
@@ -13,15 +12,15 @@
         "scripts/main.js"
     ],
     "compatibility": {
-        "minimum": "11.307",
-        "verified": "11"
+        "minimum": "12.328",
+        "verified": "12.328",
+        "maximum": "12"
     },
-    "version": "1.5.1",
-    "manifestPlusVersion": "1.2.0",
+    "version": "1.6.0",
     "url": "https://github.com/reonZ/anonymous",
     "readme": "https://github.com/reonZ/anonymous/blob/master/README.md",
     "manifest": "https://raw.githubusercontent.com/reonZ/anonymous/master/module.json",
-    "download": "https://github.com/reonZ/anonymous/releases/download/1.5.1/module.zip",
+    "download": "https://github.com/reonZ/anonymous/releases/download/1.6.0/module.zip",
     "changelog": "https://github.com/reonZ/anonymous/blob/master/CHANGELOG.md",
     "bugs": "https://github.com/reonZ/anonymous/issues",
     "styles": [
