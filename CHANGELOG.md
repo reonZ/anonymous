@@ -1,3 +1,7 @@
+# 1.6.1
+
+-   add support for more languages (thanks to [Elfrey](https://github.com/Elfrey))
+
 # 1.6.0
 
 -   updated the module to be compatible with foundry v12
