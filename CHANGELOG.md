@@ -1,3 +1,8 @@
+# 1.6.2
+
+-   fix chat renaming issue introduced in `1.6.1`
+-   fix names composed names not properly being encompassed
+
 # 1.6.1
 
 -   add support for more languages (thanks to [Elfrey](https://github.com/Elfrey))
