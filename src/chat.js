@@ -45,11 +45,11 @@ function changeNames(message, actor, html) {
 
     const escaped = Array.from(names).map((x) => RegExp.escape(x));
     const joined = escaped.join("|");
-    const regexp = new RegExp(`\\b(${joined})\\b`, "gmi");
+    const regexp = new RegExp(`(^|\\s)(${joined})($|\\s)`, "gmi");
     const renamed = getName(actor);
     const replacement = game.user.isGM
-        ? `<span class="anonymous-replaced" title="${renamed}">$1</span>`
-        : renamed;
+        ? `$1<span class="anonymous-replaced" title="${renamed}">$2</span>$3`
+        : `$1${renamed}$3`;
 
     replaceHTMLText(html, regexp, replacement);
 }
